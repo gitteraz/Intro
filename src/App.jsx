@@ -67,10 +67,6 @@ const salesPoints = [
   'Modelo comercial flexível, criado para permitir negociação e facilitar a entrada numa unidade nova com perspectiva de valorização.',
 ];
 
-const allImages = Array.from({ length: 18 }, (_, index) => `/img${index + 1}.jpeg`);
-const galleryPreviewIndexes = [2, 10, 6, 14, 1, 8, 16];
-const galleryPreviewImages = galleryPreviewIndexes.map((index) => allImages[index]);
-
 function PhoneIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -104,6 +100,10 @@ function SectionTitle({ eyebrow, title, text }) {
 }
 
 function App() {
+  const baseUrl = import.meta.env.BASE_URL;
+  const allImages = Array.from({ length: 18 }, (_, index) => `${baseUrl}img${index + 1}.jpeg`);
+  const galleryPreviewIndexes = [2, 10, 6, 14, 1, 8, 16];
+  const galleryPreviewImages = galleryPreviewIndexes.map((index) => allImages[index]);
   const [activeImageIndex, setActiveImageIndex] = useState(null);
 
   useEffect(() => {
@@ -159,7 +159,14 @@ function App() {
       <main>
         <section className="hero section">
           <div className="hero-media">
-            <div className="hero-image" role="img" aria-label="Vista aérea do condomínio Oasis Mahotas" />
+            <div
+              className="hero-image"
+              role="img"
+              aria-label="Vista aérea do condomínio Oasis Mahotas"
+              style={{
+                backgroundImage: `linear-gradient(180deg, rgba(8, 22, 18, 0.06) 0%, rgba(8, 22, 18, 0.54) 100%), url("${baseUrl}mahotas-hero.png")`,
+              }}
+            />
             <div className="hero-overlay">
               <div className="hero-copy glass">
                 <div className="hero-copy-body">
